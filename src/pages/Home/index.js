@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import LandingBg from "../../assets/landingbg2.png";
 import Like from "../../assets/like.svg";
 import Logo from "../../assets/logo.svg";
@@ -54,17 +54,11 @@ const hotels = [
   },
 ];
 const Home = () => {
-    const [linkActive, setLinkActive] = useState(0)
+  const [linkActive, setLinkActive] = useState(0);
   return (
-    <>
-      {/* {hotels.map((hotel) => (
-        <div className="hotel-card">
-            <img src={hotel.images} alt="" />
-            </div>
-    ))} */}
+    <> 
       <div className="home-page">
-        <div className="home-page-bg">
-          {/* <img src={LandingBg} alt="" /> */}
+        <div className="home-page-bg"> 
           <div className="navbar">
             <div className="logo">
               <img src={Logo} alt="" />
@@ -75,10 +69,38 @@ const Home = () => {
             </div>
             <div className="navlinks">
               <ul>
-                <li className={linkActive===0?"active-link":""} onClick={()=>{setLinkActive(0)}} >Rent</li>
-                <li className={linkActive===1?"active-link":""} onClick={()=>{setLinkActive(1)}} >Rent</li>
-                <li className={linkActive===2?"active-link":""} onClick={()=>{setLinkActive(2)}} >Rent</li>
-                <li className={linkActive===3?"active-link":""} onClick={()=>{setLinkActive(3)}} >Rent</li>
+                <li
+                  className={linkActive === 0 ? "active-link" : ""}
+                  onClick={() => {
+                    setLinkActive(0);
+                  }}
+                >
+                  Rent
+                </li>
+                <li
+                  className={linkActive === 1 ? "active-link" : ""}
+                  onClick={() => {
+                    setLinkActive(1);
+                  }}
+                >
+                  Rent
+                </li>
+                <li
+                  className={linkActive === 2 ? "active-link" : ""}
+                  onClick={() => {
+                    setLinkActive(2);
+                  }}
+                >
+                  Rent
+                </li>
+                <li
+                  className={linkActive === 3 ? "active-link" : ""}
+                  onClick={() => {
+                    setLinkActive(3);
+                  }}
+                >
+                  Rent
+                </li>
               </ul>
             </div>
           </div>
