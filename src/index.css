@@ -41,6 +41,12 @@
   border-radius: 39px;
   padding: 1.6rem;
 }
+.hotel-details-address p {
+  display: flex;
+}
+.hotel-details-address p img {
+  margin-right: 10px;
+}
 .hotel-card-img img {
   border-radius: 33px;
   width: 100%;
@@ -57,6 +63,29 @@
   letter-spacing: -0.03em;
 
   color: #000000;
+}
+.hotel-card {
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+.hotel-card-img {
+  margin-bottom: 12px;
+  overflow: hidden;
+  border-radius: 33px;
+  height: 270px;
+}
+.hotel-card:hover {
+  transform: scale(1.07);
+}
+.hotel-card-img img {
+  transition: all 0.6s ease-in-out;
+}
+.hotel-card:hover .hotel-card-img img {
+  transform: scale(1.1);
+}
+.hotel-details-amenities b {
+  font-weight: 600;
+  opacity: 0.9;
 }
 .hotel-details-price span {
   font-weight: 600;
@@ -268,4 +297,93 @@
   border-radius: 6px;
   color: #000000 !important;
   padding: 4px 1rem;
+}
+.modal {
+  position: absolute;
+  background: #ffffff;
+  border: 2px solid #303e4e;
+  border-radius: 12px;
+  padding: 2rem;
+  width: fit-content;
+  top: 0;
+  left: -10%;
+  z-index: 3;
+  padding-bottom: 0;
+}
+.react-calendar__navigation__label__labelText {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1rem;
+}
+.filter {
+  position: relative;
+}
+.react-daterange-picker__wrapper {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.react-calendar__navigation button {
+  font-size: 22px;
+}
+.modal li {
+  font-weight: 500;
+  white-space: nowrap;
+  font-size: 18.755px;
+  line-height: 28px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.activeSort {
+  width: 100%;
+  background-color: #303e4e;
+  color: #fff;
+  border-radius: 10px;
+  padding: 4px 15px;
+}
+.close {
+  float: right;
+}
+.close-model {
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 4px 15px;
+  border: 1px solid #303e4e;
+  margin-bottom: 10px;
+}
+.modal select {
+  padding: 1rem;
+  width: 200px;
+}
+.modal select option {
+  padding: 1rem;
+  font-size: 1rem;
+}
+.number-input {
+  padding: 8px 1rem;
+}
+.number-input {
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 1px solid #303e4e;
+}
+.adult-text {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.react-daterange-picker__range-divider{
+  margin: 0 1rem;
+}
+button{
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+button:hover{
+  transform: scale(1.07);
+}
+html{
+  scroll-behavior: smooth;
 }
