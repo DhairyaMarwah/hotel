@@ -1,0 +1,1 @@
+export const APIURL = 'https://booking-com.p.rapidapi.com/v1'

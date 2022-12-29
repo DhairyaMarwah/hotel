@@ -1,244 +1,100 @@
-import React, {useRef, useEffect, useState } from "react";
-import LandingBg from "../../assets/landingbg2.png";
-import moment from 'moment';
-import Like from "../../assets/like.svg";
+import React, { useRef, useEffect, useState } from "react";
+import moment from "moment";
 import Logo from "../../assets/logo.svg";
 import Search from "../../assets/search.svg";
 import Calender from "../../assets/calender.svg";
 import DropDown from "../../assets/dropdown.svg";
 import Location from "../../assets/location.svg";
-import Model from "../../components/Model";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import HotelCards from "../../components/HotelCards";
+import LocationModal from "../../components/LocationModal";
+import DateFilter from "../../components/DateFilter";
+import PriceFilter from "../../components/PriceFilter";
+import OrderByFilter from "../../components/OrderByFilter";
+import NumberFilter from "../../components/NumberFilter";
 const hotels = [
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
 
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2065&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1464146072230-91cabc968266?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2067&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1503174971373-b1f69850bded?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2113&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1472224371017-08207f84aaae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1501183638710-841dd1904471?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1574060603747-421196bce3f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2065&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1464146072230-91cabc968266?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2067&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2065&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1464146072230-91cabc968266?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
   {
-    name: "The Grand Hotel",
-    location: "New York, NY",
-    rating: 4.5,
-    numReviews: 1234,
-    price: 249.99,
-    amenities: ["3 Beds", "1 Washroom", "5x7 m2"],
-    //   "images":require('../../assets/landingbg2.png'),
     images:
       "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2067&q=80",
   },
@@ -252,81 +108,37 @@ const Home = () => {
     children: 1,
   });
   const [locations] = useState({
-    'en-gb':'en-gb',
-    'en-us':'en-us',
-    'en-ca':'en-ca',
-    'en-au':'en-au',
+    "en-gb": "en-gb",
+    "en-us": "en-us",
+    "en-ca": "en-ca",
+    "en-au": "en-au",
   });
   const [selectedOption, setSelectedOption] = useState("en-us");
-
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
-  }
-
-  const [data2, setData2] = useState(hotels); 
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  }
-
-  
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
-      "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
-    },
-  };
+  const [data2, setData2] = useState(hotels);
+  const [searchTerm, setSearchTerm] = useState("");
   const ourDate = new Date();
-  const [pirceOrder, setPirceOrder] = useState("hightolow"); 
-  const [value, setValue] = useState([moment(ourDate).add(3, 'days').format("YYYY-MM-DD"), moment(ourDate).add(9, 'days').format("YYYY-MM-DD")]);
-  console.log(value);
-  const fetchData = async () => {
-    try {
-//       const res = await fetch(
-//         `https://booking-com.p.rapidapi.com/v1/hotels/search?room_number=1
-// &checkin_date=${moment(value[0]).format("YYYY-MM-DD")}
-// &checkout_date=${moment(value[1]).format("YYYY-MM-DD")}
-// &units=metric
-// &order_by=${orderByValue}
-// &adults_number=${number.adults}
-// &filter_by_currency=AED
-// &locale=${selectedOption}
-// &dest_id=-553173
-// &dest_type=city
-// &categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1
-// &children_ages=5%2C0
-// &children_number=${number.children}
-// &page_number=1
-// &include_adjacency=true`,
-//         options
-//       );
-const res = await fetch(
-`https://booking-com.p.rapidapi.com/v1/hotels/search?room_number=1&checkin_date=${moment(value[0]).format("YYYY-MM-DD")}&checkout_date=${moment(value[1]).format("YYYY-MM-DD")}&units=metric&order_by=${orderByValue}&adults_number=${number.adults}&filter_by_currency=AED&locale=${selectedOption}&dest_id=-553173&dest_type=city&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_ages=5%2C0&children_number=${number.children}&page_number=0&include_adjacency=true`,options)
-      var json = await res.json(); 
-      setData(json.result);
-      // console.log(json);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, [orderByValue,value,selectedOption,number]);
-
+  const [pirceOrder, setPirceOrder] = useState("hightolow");
+  const [value, setValue] = useState([
+    moment(ourDate).add(3, "days").format("YYYY-MM-DD"),
+    moment(ourDate).add(9, "days").format("YYYY-MM-DD"),
+  ]);
   const [linkActive, setLinkActive] = useState(0);
   const [openModal, setopenModal] = useState("");
 
- 
-  // console.log(moment(value[0]).format("YYYY-MM-DD"));
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   const handleChange1 = (event) => {
     setNumber({ ...number, adults: event.target.value });
-  }
+  };
 
   const handleChange2 = (event) => {
     setNumber({ ...number, children: event.target.value });
-  }
+  };
   const sortarray = (type) => {
     console.log(type);
     const nextList = [...data];
@@ -351,7 +163,12 @@ const res = await fetch(
             </div>
             <div className="search">
               <img src={Search} alt="" />
-              <input value={searchTerm} onChange={handleSearchChange} type="text" placeholder="Search" />
+              <input
+                value={searchTerm}
+                onChange={handleSearchChange}
+                type="text"
+                placeholder="Search"
+              />
             </div>
             <div className="navlinks">
               <ul>
@@ -395,7 +212,8 @@ const res = await fetch(
             hub to rent a house
           </h1>
           <p>
-          Find the perfect vacation destination with our wide selection of hotels and resorts
+            Find the perfect vacation destination with our wide selection of
+            hotels and resorts
           </p>
         </div>
       </div>
@@ -405,30 +223,21 @@ const res = await fetch(
             <h1>Location</h1>
             <p>{selectedOption}</p>
           </div>
-          <div onClick={() => {
+          <div
+            onClick={() => {
               setopenModal("locationModal");
-            }} className="filter-icon">
+            }}
+            className="filter-icon"
+          >
             <img src={Location} alt="" />
           </div>
           {openModal === "locationModal" ? (
-            <div className="price-model | modal">
-                <select value={selectedOption} onChange={handleSelectChange}>
-        {Object.keys(locations).map((key) => (
-          <option key={key} value={key}>{locations[key]}</option>
-        ))}
-      </select>
-      {selectedOption && <div>Selected option: {locations[selectedOption]}</div>}
-              <div
-                onClick={() => {
-                  setopenModal("close");
-                  console.log(openModal);
-                }}
-                className="close-model"
-              >
-                <p>Close </p>
-              </div>
-              {/* <Model />/ */}
-            </div>
+            <LocationModal
+              selectedOption={selectedOption}
+              handleSelectChange={handleSelectChange}
+              locations={locations}
+              setopenModal={setopenModal}
+            />
           ) : null}
         </div>
         <div className="date-filter | filter">
@@ -445,24 +254,11 @@ const res = await fetch(
             <img src={Calender} alt="" />
           </div>
           {openModal === "dateModal" ? (
-            <div className="price-model | modal">
-              <DateRangePicker
-                minDate={new Date()}
-                onChange={setValue}  
-                format="y-MM-dd"
-                value={value}
-              />
-              <div
-                onClick={() => {
-                  setopenModal("close");
-                  console.log(openModal);
-                }}
-                className="close-model"
-              >
-                <p>Close </p>
-              </div>
-              {/* <Model />/ */}
-            </div>
+            <DateFilter
+              setValue={setValue}
+              value={value}
+              setopenModal={setopenModal}
+            />
           ) : null}
         </div>
 
@@ -480,38 +276,12 @@ const res = await fetch(
             <img src={DropDown} alt="" />
           </div>
           {openModal === "priceModal" ? (
-            <div className="price-model | modal">
-              <ul>
-                <li
-                  className={pirceOrder === "hightolow" ? "activeSort" : null}
-                  onClick={() => {
-                    sortarray("hightolow");
-                    setPirceOrder("hightolow");
-                  }}
-                >
-                  High to Low
-                </li>
-                <li
-                  className={pirceOrder === "lowtohigh" ? "activeSort" : null}
-                  onClick={() => {
-                    sortarray("lowtohigh");
-                    setPirceOrder("lowtohigh");
-                  }}
-                >
-                  Low to high
-                </li>
-              </ul>
-              <div
-                onClick={() => {
-                  setopenModal("close");
-                  console.log(openModal);
-                }}
-                className="close-model"
-              >
-                <p>Close </p>
-              </div>
-              {/* <Model />/ */}
-            </div>
+            <PriceFilter
+              pirceOrder={pirceOrder}
+              sortarray={sortarray}
+              setPirceOrder={setPirceOrder}
+              setopenModal={setopenModal}
+            />
           ) : null}
         </div>
         <div className="type-filter | filter">
@@ -528,84 +298,11 @@ const res = await fetch(
             <img src={DropDown} alt="" />
           </div>
           {openModal === "orderByModal" ? (
-            <div className="price-model | modal">
-              <ul>
-                <li
-                  className={
-                    orderByValue === "popularity" ? "activeSort" : null
-                  }
-                  onClick={() => {
-                    setOrderByValue("popularity");
-                  }}
-                >
-                  Popularity
-                </li>
-                <li
-                  className={
-                    orderByValue === "class_ascending" ? "activeSort" : null
-                  }
-                  onClick={() => {
-                    setOrderByValue("class_ascending");
-                  }}
-                >
-                  class Ascending
-                </li>
-                <li
-                  className={
-                    orderByValue === "class_descending" ? "activeSort" : null
-                  }
-                  onClick={() => {
-                    setOrderByValue("class_descending");
-                  }}
-                >
-                  class_descending
-                </li>
-                <li
-                  className={orderByValue === "distance" ? "activeSort" : null}
-                  onClick={() => {
-                    setOrderByValue("distance");
-                  }}
-                >
-                  distance
-                </li>
-                <li
-                  className={orderByValue === "upsort_bh" ? "activeSort" : null}
-                  onClick={() => {
-                    setOrderByValue("upsort_bh");
-                  }}
-                >
-                  upsort_bh
-                </li>
-                <li
-                  className={
-                    orderByValue === "review_score" ? "activeSort" : null
-                  }
-                  onClick={() => {
-                    setOrderByValue("review_score");
-                  }}
-                >
-                  review_score
-                </li>
-                <li
-                  className={orderByValue === "price" ? "activeSort" : null}
-                  onClick={() => {
-                    setOrderByValue("price");
-                  }}
-                >
-                  price
-                </li>
-              </ul>
-              <div
-                onClick={() => {
-                  setopenModal("close");
-                  console.log(openModal);
-                }}
-                className="close-model"
-              >
-                <p>Close </p>
-              </div>
-              {/* <Model />/ */}
-            </div>
+            <OrderByFilter
+              orderByValue={orderByValue}
+              setOrderByValue={setOrderByValue}
+              setopenModal={setopenModal}
+            />
           ) : null}
         </div>
         <div className="number-filter | filter">
@@ -622,72 +319,31 @@ const res = await fetch(
             <img src={Calender} alt="" />
           </div>
           {openModal === "numberModal" ? (
-            <div className="price-model | modal">
-              <p className="adult-text">Adults</p>
-                <input className="number-input" type="number" value={number.adults} onChange={handleChange1} />
-                <p>Children</p>
-      <input className="number-input" type="number" value={number.children} onChange={handleChange2} />
-              <div
-                onClick={() => {
-                  setopenModal("close");
-                  console.log(openModal);
-                }}
-                className="close-model"
-              >
-                <p>Close </p>
-              </div>
-              {/* <Model />/ */}
-            </div>
+            <NumberFilter
+              number={number}
+              handleChange2={handleChange2}
+              handleChange1={handleChange1}
+              setopenModal={setopenModal}
+            />
           ) : null}
         </div>
-        <div  className="search-btn ">
-          <button onClick={() => scollToRef.current.scrollIntoView()}>Search</button>
+        <div className="search-btn ">
+          <button onClick={() => scollToRef.current.scrollIntoView()}>
+            Search
+          </button>
         </div>
       </div>
-      <div ref={scollToRef}  className="all-hotels">
-        {data?.slice(0, 10)?.filter((hotel) => hotel?.hotel_name.toLowerCase().includes(searchTerm.toLowerCase())).map((hotel, index) => (
-          <div className="hotel-card">
-            <div className="hotel-card-img">
-              <img src={data2[index]?.images} alt="" />
-            </div>
-            <div className="hotel-details">
-              <div className="hotel-details-price">
-                <p>
-                  ${hotel?.min_total_price} <span>/night</span>{" "}
-                </p>
-                <div className="like-icon">
-                  <img src={Like} alt="" />
-                </div>
-              </div>
-              <div className="hotel-details-name">
-                <p>{hotel?.hotel_name?.slice(0, 24)}..</p>
-              </div>
-              <div className="hotel-details-address">
-                <p>
-                  {" "}
-                  <img src={Location} alt="" /> {hotel?.address}
-                </p>
-              </div>
-              <div className="hotel-details-amenities">
-                {/* <p>{hotel.amenities}</p> */}
-                {/* {hotel.amenities.map((amenity) => (
-                  <div className="amenity">
-                    <p>{amenity}</p>
-                  </div>
-                ))} */}
-                {/* <p>{hotel?.unit_configuration_label?.slice(hotel?.unit_configuration_label?.indexOf(":")+1,hotel?.unit_configuration_label?.indexOf(":")+8)}</p> */}
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: hotel?.unit_configuration_label,
-                  }}
-                >
-                  {}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <HotelCards
+        scollToRef={scollToRef}
+        value={value}
+        orderByValue={orderByValue}
+        number={number}
+        selectedOption={selectedOption}
+        searchTerm={searchTerm}
+        data2={data2}
+        data={data}
+        setData={setData}
+      />
     </>
   );
 };
