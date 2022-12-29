@@ -369,7 +369,7 @@ const res = await fetch(
                     setLinkActive(1);
                   }}
                 >
-                  Rent
+                  Buy
                 </li>
                 <li
                   className={linkActive === 2 ? "active-link" : ""}
@@ -377,7 +377,7 @@ const res = await fetch(
                     setLinkActive(2);
                   }}
                 >
-                  Rent
+                  Contact
                 </li>
                 <li
                   className={linkActive === 3 ? "active-link" : ""}
@@ -385,7 +385,7 @@ const res = await fetch(
                     setLinkActive(3);
                   }}
                 >
-                  Rent
+                  Help
                 </li>
               </ul>
             </div>
